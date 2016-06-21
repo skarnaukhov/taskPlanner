@@ -12,5 +12,6 @@
         "angular-ui-layout": "*",
         "angular-ui-router": "*",
         "bootstrap": "*"
+
     }
 }
