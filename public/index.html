@@ -1,0 +1,67 @@
+<!doctype html>
+<html ng-app="taskPlanner">
+<head>
+    <title>Notes application</title>
+    <script src="js/angular.js"></script>
+    <script src="js/angular-route.min.js"></script>
+    <script src="routes/routes.js"></script>
+    <script src="routes/tasks/tasks.js"></script>
+    <script src="routes/viewTask/task.js"></script>
+    <script src="routes/viewTask/taskService.js"></script>
+    <script src="routes/login/userService.js"></script>
+    <script src="routes/login/loginController.js"></script>
+    <script src="routes/userForm/userForm.js"></script>
+    <script src="routes/welcome/welcome.js"></script>
+    <script src="js/angular-ui/ui-bootstrap.js"></script>
+    <script src="js/angular-ui/ui-bootstrap-tpls.js"></script>
+    <script src="js/angular-layout/ui-layout.js"></script>
+    <script src="js/angular-ui-router/angular-ui-router.js"></script>
+    <script src="js/bootstrap/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="js/angular-layout/ui-layout.css">
+    <link rel="stylesheet" href="js/angular-ui/ui-bootstrap-csp.css">
+    <link rel="stylesheet" href="js/bootstrap/css/bootstrap.css">
+</head>
+
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <div class="navbar-brand">Tasks planner application</div>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse" ng-controller="LoginController">
+            <div ng-show="loggedIn" style="color:white" class="navbar-form navbar-right">
+                User: {{username}}
+                <a class="btn btn-primary" ng-click="logout()">Logout</a>
+            </div>
+            <form class="navbar-form navbar-right" ng-show="!loggedIn" ng-submit="login()">
+                <div ng-show="wrongPassword" style="color:white">
+                    Wrong username or password
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Username" class="form-control" ng-model="username" value="">
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Password" class="form-control" ng-model="password" value="">
+                </div>
+                <button type="submit" class="btn btn-success">Sign in</button>
+                <a class="btn btn-primary" ng-href="#/register">Register</a>
+            </form>
+        </div><!--/.navbar-collapse -->
+    </div>
+</nav>
+
+<div ui-layout="" class="layout-mock stretch">
+    <header class="north-back stretch" style="top: 0%; bottom: 90%;">
+    </header>
+    <div class="container" class="x-layout-main" ui-view></div>
+    <!--<div class="container" class="x-layout-main" ng-view></div>-->
+    <!--<footer class="south-back stretch" style="top: 80%; bottom:0%">
+
+    </footer>-->
+</div>
+
+</body>
+
+</html>
+

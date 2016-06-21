@@ -1,0 +1,33 @@
+<style>
+.css-form input.ng-invalid.ng-touched {
+    background-color: #FAEEEE;
+}
+</style>
+
+<div class="panel panel-primary">
+	<div class="panel-heading">User registration form</div>
+	<div class="panel-body">
+		<form class="css-form" name="userForm" novalidate ng-submit="submitForm()">
+		  <div class="form-group">
+		    <label for="userName">User name</label>
+		    <input type="text" class="form-control" id="userName" name="userName" placeholder="Username" ng-model="user.userName" required unique-user>
+		    <span ng-show="userForm.userName.$dirty && userForm.userName.$error.unique">User name is not unique</span>
+		  </div>
+		  <div class="form-group">
+		    <label for="pass">Password</label>
+		    <input type="password" class="form-control" id="pass" placeholder="Password" ng-model="user.password" required>
+		  </div>
+		  <div class="form-group">
+		    <label for="pass">Repeat Password</label>
+		    <input type="password" class="form-control" name="password2" id="pass" placeholder="Password" ng-model="user.password2" required match-to="user.password">
+		    <span ng-show="userForm.password2.$touched && userForm.password2.$error.matchTo">Passwords should match</span>
+		  </div>
+		  <div class="form-group">
+		    <label for="dob">Date of birth</label>
+		    <input type="text" class="form-control" id="dob" name="dateOfBirth" placeholder="dd.mm.yyyy" ng-pattern="/^[0-9][0-9]\.[0-1][0-9]\.[1-2][0-9][0-9][0-9]$/" ng-model="user.dateOfBirth">
+		    <span ng-show="userForm.dateOfBirth.$error.pattern">Date of birth should be in format dd.mm.yyyy</span><br>
+		  </div>
+		  <button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid">Submit</button>
+		</form>
+	</div>
+</div>

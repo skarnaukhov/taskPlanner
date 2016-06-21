@@ -1,0 +1,47 @@
+.note {
+    background-color:#EEE;
+    padding:5px;
+    width:300px;
+    border:1px solid black;
+    margin:10px;
+}
+
+.x-layout-main {
+    top: 10% !important; bottom: 20% !important;
+}
+
+.x-main-center-panel, .x-main-right-panel {
+ margin:5px;
+}
+
+.x-main-right-panel {
+}
+
+.x-main-center-panel {
+
+}
+
+.x-listed-task-filter {
+}
+
+
+.x-listed-task {
+    padding:5px;
+    background-color: #EEE;
+    margin-top: 10px;
+    width: 100%;
+    border:1px solid black;
+    cursor: pointer;
+}
+
+.x-listed-task-high-priority {
+    color: rgb(255, 0, 0);
+}
+
+.x-listed-task-average-priority {
+    color:   rgb(255,201,14);
+}
+
+.x-listed-task-low-priority {
+    color: rgb(0, 255, 0);
+}
