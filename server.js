@@ -1,3 +1,5 @@
+var doDebug = true;
+
 var express = require('express');
 var app = express();
 var path = require('path');
@@ -47,22 +49,26 @@ mongodb.MongoClient.connect(uri, function(err, db) {
    	 collections.users = users;
       });
 
-  console.log('Connection to db has been established...');
+  if (doDebug) console.log('Connection to db has been established...');
 });
 
 /*----------TASKS----------------*/
 
 app.get("/tasks", function(req,res) {
+    if (doDebug) console.log('Task list requested...');
     collections.tasks.find({user: req.session.userName}).toArray(function(err, items) {
+        if (doDebug) console.log('Found items size: ' + items.length);
 		res.send(items);
 	});
 });
 
 app.post("/tasks", function(req,res) {
+    if (doDebug) console.log('Task add request');
     var task = req.body;
     task.user = req.session.userName;
     if (validateTask(task)) {
         collections.tasks.insert(task, function() {res.end();});
+        if (doDebug) console.log('Task added successfully');
     } else {
         console.log('Task validation error');
         res.end();
@@ -71,6 +77,7 @@ app.post("/tasks", function(req,res) {
 });
 
 app.get("/task", function(req,res) {
+    if (doDebug) console.log('Requested task with id: ' + req.query.id);
     var taskId = new mongodb.ObjectID(req.query.id);
     var task = collections.tasks.findOne({_id: taskId, user: req.session.userName}, function(err, task) {
         res.send(task ? task : false);
@@ -79,6 +86,7 @@ app.get("/task", function(req,res) {
 });
 
 app.post("/task", function(req,res) {
+    if (doDebug) console.log('Attempty to add task');
     var task = req.body;
     if (validateTask(task)) {
         task['_id'] = new mongodb.ObjectID(task._id);
@@ -90,6 +98,7 @@ app.post("/task", function(req,res) {
 });
 
 app.delete("/task", function(req,res) {
+    if (doDebug) console.log('Attempt to delete task with ID ' + req.query.id);
     var taskId = new mongodb.ObjectID(req.query.id);
     var task = collections.tasks.deleteOne({_id: taskId}, function(err, task) {
         res.end();

@@ -1,30 +1,27 @@
-module.controller('ViewTaskController', function($scope, $http, $window, $stateParams, taskService) {
+module.controller('ViewTaskController', function($scope, $http, $window, $stateParams, taskService, Task) {
 
-    $scope.priorities = [1,2,3,4,5,6,7,8,9,10];
+    $scope.priorities = Task.priorities;
 
-    var currentTask = taskService.getCurrentTask();
-    if (currentTask == null) {
-                $http.get("/task", {params: {id: $stateParams.id}}).success(function(task) {
-                    if (task) {
-                        $scope.task = task;
-                    } else {
-                        $scope.task = null;
-                    }
-                });
-    } else {
-        $scope.task = currentTask;
+    $scope.task = taskService.getCurrentTask();
+    if ($scope.task == null) {
+        Task.get($stateParams.id).then(
+            (task) => $scope.task = !!task ? task : null,
+            () => console.log('Failed to get current task')
+        );
     }
 
     var updateTask = function() {
-        $http.post("/task", $scope.task).success(function() {
-    	    $window.history.back();
-    	});
+        $scope.task.update().then(
+            ()=>$window.history.back(),
+            (message)=>console.log(message)
+        );
     };
 
     var deleteTask = function() {
-        $http.delete("/task", {params: {id: $stateParams.id}}).success(function() {
-            $window.history.back();
-        });
+        $scope.task.remove().then(
+            ()=>$window.history.back(),
+            (message)=>console.log(message)
+        );
     };
 
     $scope.updateTask = updateTask;

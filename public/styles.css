@@ -10,8 +10,11 @@
     top: 10% !important; bottom: 20% !important;
 }
 
-.x-main-center-panel, .x-main-right-panel {
+.x-main-left-panel, .x-main-center-panel, .x-main-right-panel {
  margin:5px;
+}
+
+.x-main-left-panel {
 }
 
 .x-main-right-panel {

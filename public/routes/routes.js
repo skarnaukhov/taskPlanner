@@ -1,32 +1,8 @@
-var module = angular.module('taskPlanner', ['ui.router', 'ui.bootstrap', 'ui.layout']);
+var module = angular.module('taskPlanner', ['ui.router', 'ui.bootstrap', 'ui.layout', 'TreeWidget']);
+//tree widget info: https://github.com/AlexSuleap/angular-tree-widget
 
 module.config(['$stateProvider', '$urlRouterProvider',
-           /*function($routeProvider) {
-               $routeProvider
-                   .when('/register', {
-                        templateUrl: 'routes/userForm/userForm.html',
-                        controller: 'UserFormController',
-                        requireLogin: false
-                   })
-                   .when('/tasks/view', {
-                        templateUrl: 'routes/tasks/tasks.html',
-                        controller: 'TasksController',
-                        requireLogin: true
-                   })
-                   .when('/tasks/:id', {
-                        templateUrl: 'routes/viewTask/viewTask.html',
-                        controller: 'ViewTaskController',
-                        requireLogin: true
-                        })
-                   .when('/:welcome?', {
-                        templateUrl: 'routes/welcome/welcome.html',
-                        controller: 'WelcomeController',
-                        requireLogin: false
-                   })
-                   .otherwise({
-                        redirectTo: '/'
-                   });
-           }])*/function($stateProvider, $urlRouterProvider){
+           function($stateProvider, $urlRouterProvider){
                   $stateProvider
                     .state('register', {
                         url: "/register",

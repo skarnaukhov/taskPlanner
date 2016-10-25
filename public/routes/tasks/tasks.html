@@ -1,23 +1,34 @@
-<div ui-layout ="{ flow : 'column', dividerSize: 0 }" class="x-layout-main">
-        <div ui-layout-container></div>
-        <div ui-layout-container="central">
-            <div class="x-main-center-panel">
+<div ui-layout="{ flow : 'column', dividerSize: 0 }" class="x-layout-main">
+    <div ui-layout-container>
+        <div class="x-main-left-panel">
+            <span class="label label-default">Add goal:</span><br>
+            <input type="text" class="form-control" ng-model="goalName">
+            <button type="button" class="btn btn-primary" ng-click="addGoal()">Add goal</button>
+            <button type="button" ng-disabled="!selectedNode" class="btn btn-primary" ng-click="clearSelection()">Clear Selection</button>
+            <tree nodes='tasksTree'>
+            </tree>
+        </div>
+    </div>
+    <div ui-layout-container="central">
+        <div class="x-main-center-panel">
             <span class="label label-default">Add task:</span><br>
             <input type="text" class="form-control" ng-model="name">
-            <button type="button" class="btn btn-primary" ng-click="addTask()">Add task</button>
+            <button ng-disabled="!selectedNode" type="button" class="btn btn-primary" ng-click="addTask()">Add task</button>
+        </div>
+    </div>
+    <div ui-layout-container>
+        <div class="x-main-right-panel">
+            <span class="label label-default">Suggested tasks TODO:</span><br>
+            <input ng-model="searchTask" class="form-control x-listed-task-filter"
+                   placeholder="Filter tasks">
+            <div class="x-listed-task" ng-repeat="task in tasks | filter: searchTask | filter: onlyTasksFilter | orderBy : '-priority'"
+                 ng-click="showTask(task)">
+                <p><span class="glyphicon glyphicon-exclamation-sign" ng-class="task.getDisplayCss()"></span> The ID is
+                    {{task._id}}</p>
+                <p>The name is {{task.name}}</p>
             </div>
         </div>
-        <div ui-layout-container>
-            <div class="x-main-right-panel">
-                <span class="label label-default">Tasks list:</span><br>
-                <input ng-model="searchTask" class="form-control x-listed-task-filter"
-                       placeholder="Filter tasks">
-                <div class="x-listed-task"  ng-repeat="task in tasks | filter: searchTask | orderBy : '-priority'" ng-click="showTask(task)">
-                    <p><span class="glyphicon glyphicon-exclamation-sign" ng-class="taskClass(task)"></span> The ID is {{task._id}}</p>
-                    <p>The name is {{task.name}}</p>
-                </div>
-            </div>
-        </div>
+    </div>
 </div>
 
 
